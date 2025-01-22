@@ -1,0 +1,30 @@
+---
+- hosts: "{{ psmf }}"
+  tasks:
+    - name: Copy the sql file for service name, id
+      copy:
+        src: service.sql
+        dest: /osp/local/home/linus
+        owner: linus
+        group: in
+      when: inventory_hostname in active_smf
+
+    - name: Run the sql file
+      shell: 
+        cmd: "sqlminus -l pfmconfig@PSMF '@service.sql';"
+        chdir: /osp/local/home/linus
+      become: true
+      become_method: su
+      become_flags: '-'
+      become_user: linus
+      register: command_result
+      failed_when: "'\"stderr\": \"\"' not in command_result.module_stdout"
+      changed_when: "'\"stderr\": \"\"' in command_result.module_stdout"
+      when: inventory_hostname in active_smf
+
+    - name: Fetching the service_names.txt
+      fetch:
+        src: /osp/local/home/linus/service_list.txt
+        dest: ../data/
+        flat: yes
+      when: inventory_hostname in active_smf

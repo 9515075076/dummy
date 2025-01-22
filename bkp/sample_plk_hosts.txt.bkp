@@ -1,0 +1,132 @@
+wawinsmf01root#cat /etc/hosts
+127.0.0.1                               localhost loghost
+#
+# SMF Name: psmf - Cluster Members: wawinsmf01 & wawinsmf02
+# Network Name: PLK - Dpe Domain: waw
+192.168.10.6                          psmf psmf-private4 psmf-private                              #Int1
+192.168.20.6                          psmf psmf-netwatcher4 psmf-netwatcher                        #Int2
+10.34.9.6                             psmf psmf-public4 psmf-public psmf.                          #Mng1
+#
+# Hostname: wawinsmf01 Linux   Machine Type: PSMF                                                                      #MCP:wawinmcp01
+# Network Name: PLK - Dpe Domain: waw
+192.168.10.4                          wawinsmf01 wawinsmf01_eth0 wawinsmf01-private4 wawinsmf01-private wawinsmf01. #Int1
+192.168.20.4                          wawinsmf01 wawinsmf01_eth4 wawinsmf01-netwatcher4 wawinsmf01-netwatcher wawinsmf01. #Int2
+10.34.9.4                             wawinsmf01 wawinsmf01_eth1eth5 wawinsmf01_eth1 wawinsmf01_eth5 wawinsmf01-public4 wawinsmf01-public wawinsmf01. #Mng1
+10.34.9.40                            wawinsmf01 wawinsmf01_eth3 wawinsmf01-user14 wawinsmf01-user1 #Usr1/1 Usr1
+10.34.9.36                            wawinsmf01-console4 wawinsmf01-console                       #Cons
+#
+# Hostname: wawinsmf02 Linux   Machine Type: PSMF                                                                     #MCP:wawinmcp01
+# Network Name: PLK - Dpe Domain: waw
+192.168.10.5                          wawinsmf02 wawinsmf02_eth0 wawinsmf02-private4 wawinsmf02-private wawinsmf02. #Int1
+192.168.20.5                          wawinsmf02 wawinsmf02_eth4 wawinsmf02-netwatcher4 wawinsmf02-netwatcher wawinsmf02. #Int2
+10.34.9.5                             wawinsmf02 wawinsmf02_eth1eth5 wawinsmf02_eth1 wawinsmf02_eth5 wawinsmf02-public4 wawinsmf02-public wawinsmf02. #Mng1
+10.34.9.41                            wawinsmf02 wawinsmf02_eth3 wawinsmf02-user14 wawinsmf02-user1 #Usr1/1 Usr1
+10.34.9.37                            wawinsmf02-console4 wawinsmf02-console                       #Cons
+#
+# Hostname: wawinsle01 Linux    Machine Type: SLEE                                                                    #MCP:wawinmcp01
+# Network Name: PLK - Dpe Domain: waw
+192.168.10.7                         wawinsle01 wawinsle01_eth0 wawinsle01-private4 wawinsle01-private wawinsle01. wawinsle01-public4 wawinsle01-public wawinsle01. #Int1
+192.168.20.7                          wawinsle01 wawinsle01_eth4 wawinsle01-netwatcher4 wawinsle01-netwatcher wawinsle01. #Int2
+10.34.9.9                             wawinsle01 wawinsle01_eth1eth5 wawinsle01_eth1 wawinsle01_eth5 wawinsle01-user14 wawinsle01-user1 # Mng1
+172.20.5.4                            wawinsle01 wawinsle01_eth2                                   #Sig1
+172.21.5.4                            wawinsle01 wawinsle01_eth6                                   #Sig2
+10.34.9.38                            wawinsle01-console4 wawinsle01-console                       #Cons
+#
+# Hostname: wawinsle02 Linux    Machine Type: SLEE                                                                      #MCP:wawinmcp01
+# Network Name: PLK - Dpe Domain: waw
+192.168.10.8                          wawinsle02 wawinsle02_eth0 wawinsle02-private4 wawinsle02-private wawinsle02. wawinsle02-public4 wawinsle02-public wawinsle02. #Int1
+192.168.20.8                          wawinsle02 wawinsle02_eth4 wawinsle02-netwatcher4 wawinsle02-netwatcher wawinsle02. #Int2
+10.34.9.10                            wawinsle02 wawinsle02_eth1eth5 wawinsle02_eth1 wawinsle02_eth5 wawinsle02-user14 wawinsle02-user1 #Mng1
+172.20.5.5                            wawinsle02 wawinsle02_eth2                                   #Sig1
+172.21.5.5                            wawinsle02 wawinsle02_eth6                                   #Sig2
+10.34.9.39                            wawinsle02-console4 wawinsle02-console                       #Cons
+#
+# Hostname: wawinmcp01 Linux	Machine Type: MCP 
+# Network Name: PLK - Dpe Domain: waw
+192.168.10.9                         wawinmcp01 wawinmcp01_eth0 wawinmcp01-private4 wawinmcp01-private wawinmcp01. #Int1
+192.168.20.9                         wawinmcp01 wawinmcp01_eth4 wawinmcp01-netwatcher4 wawinmcp01-netwatcher wawinmcp01. #Int2
+10.34.9.11                           wawinmcp01 wawinmcp01_eth1eth5 wawinmcp01_eth1 wawinmcp01_eth5 wawinmcp01-public4 wawinmcp01-public wawinmcp01. #Mng1
+10.34.9.42                           wawinmcp01 wawinmcp01_eth3 wawinmcp01-user14 wawinmcp01-user1    #Usr1/1 Usr1
+10.34.9.13                           wawinmcp01-console4 wawinmcp01-console                         #Cons
+#
+# cluster interconnect
+172.16.1.42                          wawinsmf01-cn wawinsmf01 wawinsmf01_bond1
+172.16.1.44                          wawinsmf02-cn wawinsmf02 wawinsmf02_bond2
+#
+# SMF Name: mppsmf - Cluster Members: pozinsmf01 & pozinsmf02
+# Network Name: PLK - Dpe Domain: poz
+192.168.10.25                          mppsmf mppsmf-private4 mppsmf-private                              #Int1
+192.168.20.25                          mppsmf mppsmf-netwatcher4 mppsmf-netwatcher                        #Int2
+10.34.73.6                             mppsmf mppsmf-public4 mppsmf-public mppsmf.                          #Mng1
+#
+# Hostname: pozinsmf01 Linux   Machine Type: MPPSMF                                                                       #MCP:pozinmcp01
+# Network Name: PLK - Dpe Domain: poz
+192.168.10.23                          pozinsmf01 pozinsmf01_eth0 pozinsmf01-private4 pozinsmf01-private pozinsmf01. #Int1
+192.168.20.23                          pozinsmf01 pozinsmf01_eth4 pozinsmf01-netwatcher4 pozinsmf01-netwatcher pozinsmf01. #Int2
+10.34.73.4                             pozinsmf01 pozinsmf01_eth1eth5 pozinsmf01_eth1 pozinsmf01_eth5 pozinsmf01-public4 pozinsmf01-public pozinsmf01. #Mng1
+10.34.73.40                            pozinsmf01 pozinsmf01_eth1 pozinsmf01-user14 pozinsmf01-user1 #Usr1/1 Usr1
+10.34.73.36                            pozinsmf01-console4 pozinsmf01-console                       #Cons
+#
+# Hostname: pozinsmf02 Linux   Machine Type: MPPSMF                                                                       #MCP:pozinmcp01
+# Network Name: PLK - Dpe Domain: poz
+192.168.10.24                          pozinsmf02 pozinsmf02_eth0 pozinsmf02-private4 pozinsmf02-private pozinsmf02. #Int1
+192.168.20.24                          pozinsmf02 pozinsmf02_eth4 pozinsmf02-netwatcher4 pozinsmf02-netwatcher pozinsmf02. #Int2
+10.34.73.5                             pozinsmf02 pozinsmf02_eth1eth5 pozinsmf02_eth1 pozinsmf02_eth5 pozinsmf02-public4 pozinsmf02-public pozinsmf02. #Mng1
+10.34.73.41                            pozinsmf02 pozinsmf02_eth1 pozinsmf02-user14 pozinsmf02-user1 #Usr1/1 Usr1
+10.34.73.37                            pozinsmf02-console4 pozinsmf02-console                       #Cons
+#
+# Hostname: pozinsle01 Linux   Machine Type: SLEE                                                                       #MCP:pozinmcp01
+# Network Name: PLK - Dpe Domain: poz
+192.168.10.26                         pozinsle01 pozinsle01_eth0 pozinsle01-private4 pozinsle01-private pozinsle01. pozinsle01-public4 pozinsle01-public pozinsle01. #Int1
+192.168.20.26                         pozinsle01 pozinsle01_eth4 pozinsle01-netwatcher4 pozinsle01-netwatcher pozinsle01. #Int2
+10.34.73.9                            pozinsle01 pozinsle01_eth1eth5 pozinsle01_eth1 pozinsle01_eth5 pozinsle01-user14 pozinsle01-user1 #Mng1
+172.20.69.4                           pozinsle01 pozinsle01_eth2                                   #Sig1
+172.21.69.4                           pozinsle01 pozinsle01_eth6                                   #Sig2
+10.34.73.38                           pozinsle01-console4 pozinsle01-console                       #Cons
+#
+# Hostname: pozinsle02 Linux    Machine Type: SLEE                                                                      #MCP:pozinmcp01
+# Network Name: PLK - Dpe Domain: poz
+192.168.10.27                         pozinsle02 pozinsle02_eth0 pozinsle02-private4 pozinsle02-private pozinsle02. pozinsle02-public4 pozinsle02-public pozinsle02. #Int1
+192.168.20.27                         pozinsle02 pozinsle02_eth4 pozinsle02-netwatcher4 pozinsle02-netwatcher pozinsle02. #Int2
+10.34.73.10                           pozinsle02 pozinsle02_eth1eth5 pozinsle02_eth1 pozinsle02_eth5 pozinsle02-user14 pozinsle02-user1 #Mng1
+172.20.69.5                           pozinsle02 pozinsle02_eth2                                   #Sig1
+172.21.69.5                           pozinsle02 pozinsle02_eth6                                   #Sig2
+10.34.73.39                           pozinsle02-console4 pozinsle02-console                       #Cons
+#
+# Hostname: pozinmcp01 Linux	Machine Type: MCP 
+# Network Name: PLK - Dpe Domain: poz
+192.168.10.28                         pozinmcp01 pozinmcp01_eth0 pozinmcp01-private4 pozinmcp01-private pozinmcp01. #Int1
+192.168.20.28                         pozinmcp01 pozinmcp01_eth4 pozinmcp01-netwatcher4 pozinmcp01-netwatcher pozinmcp01. #Int2
+10.34.73.11                           pozinmcp01 pozinmcp01_eth1eth5 pozinmcp01_eth1 pozinmcp01_eth5 pozinmcp01-public4 pozinmcp01-public pozinmcp01. #Mng1
+10.34.73.42                           pozinmcp01 pozinmcp01_eth3 pozinmcp01-user14 pozinmcp01-user1    #Usr1/1 Usr1
+10.34.73.13                            pozinmcp01-console4 pozinmcp01-console                         #Cons
+#
+# cluster interconnect
+172.16.1.52                           pozinsmf01-cn pozinsmf01 pozinsmf01_bond1
+172.16.1.54                           pozinsmf02-cn pozinsmf02 pozinsmf02_bond2
+#
+# Main Site Storage
+10.34.9.7                            wawinstor01
+10.34.9.8                            wawinstor02
+#
+# MP Storage
+10.34.73.7                           pozinstor01
+10.34.73.8                           pozinstor02
+#
+# Main Site Switches
+10.34.9.12                           wawinsw01
+192.168.10.10                        wawinsw03
+192.168.20.10                        wawinsw04
+10.34.9.45                           wawinsw05
+
+# MP Switches
+10.34.73.12                          pozinsw01
+192.168.10.30                        pozinsw03
+192.168.20.30                        pozinsw04
+10.34.73.45                          pozinsw05
+#
+# NTP Server
+10.34.3.1                            ntp-server1
+10.34.67.1                           ntp-server2
+#SNMP Server
+10.34.4.168                          netact1               #SNMP/ NetAct Server

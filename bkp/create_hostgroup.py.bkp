@@ -1,0 +1,98 @@
+import re
+import sys
+from collections import defaultdict
+from pprint import PrettyPrinter
+pp = PrettyPrinter(indent=4)
+
+host_dict = {}
+name = ""
+typ = ""
+dpe_domain = ""
+machine = defaultdict(list)
+final = {}
+# file_etc_hosts = open("/etc/hosts", "r")
+file_etc_hosts = open("./sample_plk_hosts.txt", "r")
+content = file_etc_hosts.readlines()
+
+for i in content:
+    if "Cluster" in i:
+        name = ""
+        typ = ""
+        dpe_domain = ""
+        machine = defaultdict(list)
+    if "Hostname:" in i:
+        name = re.findall(r"Hostname: (\w+)", i)
+        typ = re.findall(r"Machine Type: (\w+)", i)[0]
+    if "Dpe Domain:" in i and name != "":
+        dpe_domain = re.findall(r"Dpe Domain: (\w+)", i)[0]
+    if "Mng" in i and name != "":
+        host_ip = i.split(" ")[0]
+        machine[typ].append({"name": name[0], "ip" : host_ip})
+        host_dict[dpe_domain] = machine
+
+#Removing MCP
+for host, value in host_dict.items():
+    for machine_type in list(value):
+        if machine_type == "MCP":
+            host_dict[host].pop(machine_type)
+
+# file_ansiblehosts = open("/etc/ansible/hosts", "a+")
+# file_ansiblehosts = open("./apps/application_patch/scripts/sample_ansible_hosts.txt", "w")
+file_ansiblehosts = open("../data/sample_ansible_hosts.txt", "w")
+# pp.pprint(host_dict)
+
+#RUN FOR LOOP ON DPE_DOMAIN
+for host, value in host_dict.items():
+    final = {}
+    file_ansiblehosts.writelines("[{0}_ALL]\n".format(host))
+    print("GROUP_NAME : {0}_ALL".format(host))
+    for machine_type, machine_value in value.items():
+        for i in range(len(machine_value)):
+            final[machine_value[i]["name"]] = machine_value[i]["ip"]
+    file_ansiblehosts.writelines("\n".join(str("    "+ key + " ansible_host=\"{0}\"".format(val)) for key, val in sorted(final.items(), key = lambda item: item[1])))
+    file_ansiblehosts.writelines("\n")
+
+for host, value in host_dict.items():
+    for machine_type, machine_value in value.items():
+        file_ansiblehosts.writelines("[{0}_{1}]\n".format(host, machine_type.replace("_","")))
+        print("GROUP_NAME : {0}_{1}".format(host, machine_type.replace("_","")))
+        final = {}
+        for i in range(len(machine_value)):
+            final[machine_value[i]["name"]] = machine_value[i]["ip"]
+        file_ansiblehosts.writelines("\n".join(str("    "+ key + " ansible_host=\"{0}\"".format(val)) for key, val in sorted(final.items(), key = lambda item: item[1])))
+        file_ansiblehosts.writelines("\n")
+
+for host, value in host_dict.items():
+    file_ansiblehosts.writelines("[{0}_{1}_{2}]\n".format(host, "PSMF", "MPPSMF"))
+    print("GROUP_NAME : {0}_{1}_{2}".format(host, "PSMF", "MPPSMF"))
+    for machine_type, machine_value in value.items():
+        final = {}
+        if machine_type == "PSMF" or machine_type == "MPPSMF":
+            for i in range(len(machine_value)):
+                final[machine_value[i]["name"]] = machine_value[i]["ip"]
+            file_ansiblehosts.writelines("\n".join(str("    "+machine_value[i]["name"] + " ansible_host=\"{0}\"".format(machine_value[i]["ip"])) for i in range(len(machine_value))))
+            file_ansiblehosts.writelines("\n")
+
+for host, value in host_dict.items():
+    for machine_type, machine_value in value.items():
+        if machine_type == "PSMF":
+            print("{0} PSMF_IP : ".format(host), end='')
+            print(' '.join([machine_value[i]["ip"] for i in range(len(machine_value))]))
+        if machine_type == "MPPSMF":
+            print("{0} MPPSMF_IP : ".format(host), end='')
+            print(' '.join([machine_value[i]["ip"] for i in range(len(machine_value))]))
+        if machine_type == "SLEE":
+            print("{0} SLEE_IP : ".format(host), end='')
+            print(' '.join([machine_value[i]["ip"] for i in range(len(machine_value))]))
+
+for host, value in host_dict.items():
+    for machine_type, machine_value in value.items():
+        if machine_type == "PSMF":
+            print("{0} PSMF_NAME : ".format(host), end='')
+            print(' '.join([machine_value[i]["name"] for i in range(len(machine_value))]))
+        if machine_type == "MPPSMF":
+            print("{0} MPPSMF_NAME : ".format(host), end='')
+            print(' '.join([machine_value[i]["name"] for i in range(len(machine_value))]))
+        if machine_type == "SLEE":
+            print("{0} SLEE_NAME : ".format(host), end='')
+            print(' '.join([machine_value[i]["name"] for i in range(len(machine_value))]))

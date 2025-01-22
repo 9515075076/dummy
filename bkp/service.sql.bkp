@@ -1,0 +1,17 @@
+set pages 0
+set feedback off
+set heading off
+set linesize 1000
+set termout off
+set trimspool on
+set markup csv on
+spool service_list.txt
+select service.name, service.ri, host.hostname, parttion.smf_ref FROM service
+INNER JOIN parttion
+ON service.ri=parttion.serv_ref
+INNER JOIN host
+ON host.ri=parttion.host_ref
+where service.grp_bep is not NULL and service.name NOT LIKE 'pfm%'
+ORDER BY parttion.host_ref;
+-- select NAME||','||RI from SERVICE where grp_bep is not NULL and NAME NOT LIKE 'pfm%';
+spool off
