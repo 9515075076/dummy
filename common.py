@@ -5,6 +5,8 @@ import os
 from config import app_conf_json_path
 from json import loads, dumps
 
+
+print("hello world")
 def console_output(command):
     return str(subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE).communicate()[0].decode("utf-8")).split("\n")
 
