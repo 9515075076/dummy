@@ -21,7 +21,7 @@ def test_platform_credenials(platform_ip, root_password, linus_password, toc_pas
     else:
         print(platform_output)
         for line in platform_output:
-            if "Permission denied, please try again." in line or "Error: Wrong login or password" in line or "su: incorrect password" in line:
+            if "Permission denied, please try again." in line or "Error: Wron login or password" in line or "su: incorrect password" in line:
                 return False, "Error : One or more passwords are incorrect!"
             elif "Error:" in line:
                 return False, "Error : {0}".format(line.split("Error:")[1].strip())
